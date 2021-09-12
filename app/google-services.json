@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "258173634337",
+    "project_id": "sweefttodolist",
+    "storage_bucket": "sweefttodolist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258173634337:android:7b7f3e9cc4fba87489a060",
+        "android_client_info": {
+          "package_name": "com.example.sweefttodolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258173634337-2iso46955aafnou7qraq08uk6nh8fj25.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO5rbUIKrhnP4deoV3q2rsLgmjB8BC1VE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258173634337-2iso46955aafnou7qraq08uk6nh8fj25.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+        <variable
+            name="isLogin"
+            type="Boolean" />
+
+        <variable
+            name="isPasswordValid"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.example.sweefttodolist.view.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.LoginActivity">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/gilroy_medium"
+            android:text="TO DO"
+            android:textColor="@color/blue"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Your ToDo List"
+            android:textColor="@color/appColor"
+            android:textSize="24dp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <LinearLayout
+            android:id="@+id/lnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="@{isLogin? View.VISIBLE : View.GONE }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <EditText
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="false"
+                android:hint="Email"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/tvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="false"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:onClick="@{data.loginUser()}"
+                android:text="Login" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="@{isLogin? View.GONE : View.VISIBLE }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <EditText
+                android:id="@+id/tvEmailReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Email"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/tvPasswordReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:afterTextChanged="@{(text) -> data.onTextChange(text)}"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:maxLength="30"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@{isPasswordValid? @color/purple_700 :@color/grey}"
+                android:clickable="@{isPasswordValid ? true : false}"
+                android:onClick="@{data.registerUser()}"
+                android:text="Register" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="220dp"
+            android:onClick="@{data.switchUIs()}"
+            android:text="@{isLogin? @string/registration : @string/login}"
+            android:textColor="@color/appColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{loading? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
